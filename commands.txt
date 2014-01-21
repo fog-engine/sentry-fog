@@ -1,0 +1,3 @@
+PGPASSWORD=$POSTGRESQL_PASSWORD createdb -E utf-8 sentry -h $POSTGRESQL_HOST -U $POSTGRESQL_USER
+source /www/sentry/bin/activate
+docker run -i -t -p 9000:9000 -e POSTGRESQL_USER=db_user -e POSTGRESQL_PASSWORD=foopass -e POSTGRESQL_HOST=172.17.0.31 -e POSTGRESQL_PORT=5432 -e SENTRY_USER=admin -e SENTRY_PASSWORD=foopass -e SENTRY_EMAIL=foo@non.existent localhost:5000/sentry /bin/bash -c 'source /www/sentry/bin/activate && sentry --config=/etc/sentry.conf.py start'

@@ -1,0 +1,10 @@
+#!/usr/bin/expect
+
+spawn sentry --config=/etc/sentry.conf.py createsuperuser
+
+expect "Username:" {send "$env(SENTRY_USER)\n"}
+expect "Error: That username is already taken." {exit 0}
+expect "Email address:" {send "$env(SENTRY_EMAIL)\n"}
+expect "Password:" {send "$env(SENTRY_PASSWORD)\n"}
+expect "Password (again):" {send "$env(SENTRY_PASSWORD)\n"}
+expect "Superuser created successfully."
